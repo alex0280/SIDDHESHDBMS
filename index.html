@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Transaction Processing</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .wrapper {
+            width: 85%;
+            margin: auto;
+            padding: 25px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+            margin-top: 30px;
+            color: #333;
+        }
+        h1 {
+            color: #333;
+            background-color: #14dbdb;
+            padding: 10px;
+            border-left: 5px solid #fbc02d;
+            border-radius: 5px;
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+        p {
+            font-size: 16px;
+            color: #444;
+            line-height: 1.7;
+        }
+        .box {
+            background: #ecf0f1;
+            padding: 12px;
+            border-left: 6px solid #3498db;
+            margin-top: 10px;
+            color: #2c3e50;
+        }
+        .img-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .img-section img {
+            width: 75%;
+            max-width: 550px;
+            border-radius: 12px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Understanding Transaction Processing</h1>
+        
+        <h2>Definition of a Transaction</h2>
+        <p>
+            A transaction is a logical unit of work in a database system that consists of a sequence of operations performed as a single unit. 
+            A transaction ensures that the database remains consistent and adheres to integrity constraints, even in cases of system failure. 
+            Transactions are crucial in database management as they help in maintaining data accuracy, reliability, and consistency. 
+            In practical applications, transactions typically involve multiple operations such as inserting, updating, deleting, or retrieving records. 
+            The primary goal of a transaction is to transition the database from one consistent state to another while following the ACID properties 
+            (Atomicity, Consistency, Isolation, Durability).
+        </p>
+        
+        <h2>Key Transaction Properties</h2>
+        <center>
+        <img src="photo4" height="250" width="500">
+        </center> 
+        <p>The ACID properties define reliable transaction processing:</p>
+        <div class="box">
+            <ul>
+                <li><strong>Atomicity</strong> - A transaction is either fully completed or not executed at all. <br>
+                    <strong>Example:</strong> If a customer withdraws $500 from an ATM but the system crashes before the balance is updated, the transaction is rolled back.</li>
+                <li><strong>Consistency</strong> - Transactions must maintain database integrity, ensuring valid state transitions. <br>
+                    <strong>Example:</strong> When transferring money, the total sum of all accounts should remain the same before and after the transaction.</li><br>
+                <li><strong>Isolation</strong> - The execution of transactions remains independent, ensuring that one transaction does not interfere with another. <br>
+                    <strong>Example:</strong> If two users try to buy the last ticket for a concert at the same time, isolation ensures only one purchase is successful.</li><br>
+                <li><strong>Durability</strong> - Changes made by committed transactions persist permanently, even in case of a system failure. <br>
+                    <strong>Example:</strong> If an online purchase is confirmed, the order remains saved even if the server crashes.</li><br>
+            </ul>
+        </div>
+        
+        <h2>Recoverability in Schedules</h2>
+        <center>
+        <img src="photo5" height="200" width="550">
+        </center> 
+        <p>Based on recoverability, schedules can be categorized into:</p>
+        <div class="box">
+            <ul>
+                <li><strong>Recoverable Schedules</strong> - Ensure committed transactions are not undone due to the failure of dependent transactions. <br>
+                    <strong>Example:</strong> If T1 updates a product price and T2 uses that price to calculate taxes, T1 must commit first.</li><br>
+                <li><strong>Cascadeless Schedules</strong> - Prevent cascading rollbacks by committing dependent transactions in order. <br>
+                    <strong>Example:</strong> A hotel booking system ensures that a room reservation is only confirmed after verifying the guest's payment.</li><br>
+                <li><strong>Strict Schedules</strong> - Ensure no transaction reads uncommitted data, thereby preventing inconsistencies. <br>
+                    <strong>Example:</strong> A bank system restricts access to an account balance update until the previous transaction is fully committed.</li><br>
+            </ul>
+        </div>
+        
+        <h2>Serializability in Schedules</h2>
+        <center>
+        <img src="photo6" height="300" width="550">
+        </center> 
+        <p>Types of serializability include:</p>
+        <div class="box">
+            <ul>
+                <li><strong>Conflict Serializability</strong> - Transactions can be reordered to form a serial execution without altering results. <br>
+                    <strong>Example:</strong> If T1 updates product stock and T2 updates product price, their order can be swapped if they do not depend on each other.</li><br>
+                <li><strong>View Serializability</strong> - Transactions yield the same results as a serial schedule but may not be conflict serializable. <br>
+                    <strong>Example:</strong> If T1 reads initial stock levels, T2 updates them, and T1 writes a final value, the execution order can be adjusted as long as the result is correct.</li><br>
+            </ul>
+        </div>
+        
+        <h2>Conclusion</h2>
+        <p>
+            Transaction processing plays a vital role in database management by ensuring data integrity, reliability, and consistency. 
+            The ACID properties provide a framework for designing robust transactions that maintain system stability. 
+            Additionally, understanding different types of recoverability and serializability helps in creating optimized database schedules. 
+            By adhering to these principles, databases can efficiently manage concurrent operations and prevent data anomalies, 
+            ensuring a seamless experience for users in various applications such as banking, e-commerce, and online reservations.
+        </p>
+    </div>
+</body>
+</html>
